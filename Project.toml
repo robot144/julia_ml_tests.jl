@@ -1,0 +1,13 @@
+name = "julia_ml_tests"
+uuid = "8c25c2e5-4de8-42c6-89b7-2f607fc1364a"
+authors = ["robot144 <robot144@protonmail.com>"]
+version = "0.1.0"
+
+[deps]
+BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+cuDNN = "02a925ec-e4fe-4b08-9a7e-0d78e3d38ccd"
