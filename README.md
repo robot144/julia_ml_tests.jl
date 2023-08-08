@@ -9,3 +9,4 @@ This is just a collection of introductory material. Most things are copies from 
 - `flux_elementary.ipynb` : contains basic data-structures and methods from Flux.jl, e.g a Dense network layer etc.
 - `flux_tiny_example_cpu.ipynb` : contains the classical XOR problem from the [Flux.jl quickstart](https://fluxml.ai/Flux.jl/stable/models/quickstart/) There are two versions, one using cpu and one using gpu.
 - `flux_mnist.ipynb` : based on the classical classification of handwritten digits.
+- `flux_mnist_autoencoder.ipynb` : convolutional auto-encoder tested on the mnist images
