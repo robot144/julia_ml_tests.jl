@@ -10,3 +10,4 @@ This is just a collection of introductory material. Most things are copies from 
 - `flux_tiny_example_cpu.ipynb` : contains the classical XOR problem from the [Flux.jl quickstart](https://fluxml.ai/Flux.jl/stable/models/quickstart/) There are two versions, one using cpu and one using gpu.
 - `flux_mnist.ipynb` : based on the classical classification of handwritten digits.
 - `flux_mnist_autoencoder.ipynb` : convolutional auto-encoder tested on the mnist images. It contains some tests on how it copes with missing parts of the image.
+- `flux_pinn.ipynb` : solve a simple differential equation with a neural network.
