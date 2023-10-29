@@ -11,3 +11,6 @@ This is just a collection of introductory material. Most things are copies from 
 - `flux_mnist.ipynb` : based on the classical classification of handwritten digits.
 - `flux_mnist_autoencoder.ipynb` : convolutional auto-encoder tested on the mnist images. It contains some tests on how it copes with missing parts of the image.
 - `flux_pinn.ipynb` : solve a simple differential equation with a neural network.
+
+## Graph Neural Networks
+- `geoflux_ex1.ipynb` : Paper classification with GCN based on word presence and citation links.
