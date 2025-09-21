@@ -29,6 +29,7 @@ struct Wave1DSurge_cpu
     dx::Float64 # spatial step
     nx::Int64 # number of spatial points
     rho::Float64 # density
+    C::Float64 # Chezy friction factor
     tau::Function # function of time t: Float64 -> Float64
                     # wind stress as a function of time
 end
@@ -111,10 +112,11 @@ end
     Compute time derivative of the state
 """
 function (f::Wave1DSurge_cpu)(dx_dt,x,p,t)
-    dx=f.dx
-    g=f.g
-    D=f.D
-    rho=f.rho
+    g=f.g       # gravity
+    D=f.D       # depth profile
+    dx=f.dx     # spatial step 
+    rho=f.rho   # density
+    C=f.C       # Chezy friction factor
     tau_val = f.tau(t)
     # temporary variables
     ∂h∂x = similar(x.u) # allocating version, is not optimal for performance
@@ -127,7 +129,7 @@ function (f::Wave1DSurge_cpu)(dx_dt,x,p,t)
     du_dx!(∂Hu∂x,Hu,dx)
     dh_dx!(∂h∂x,x.h,dx)
     # compute time derivatives
-    @. dx_dt.u = -g * ∂h∂x + tau_val/(rho * H)
+    @. dx_dt.u = -g * ∂h∂x + tau_val/(rho * H) - (g*x.u*abs(x.u))/(C*C*rho*H) 
     @. dx_dt.h = -∂Hu∂x
 end
 
