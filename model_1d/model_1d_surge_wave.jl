@@ -26,12 +26,15 @@ struct Wave1DSurge_cpu
     g::Float64 # gravity
     D::Vector{Float64} # depth is variable in space
     L::Float64 # length
+    W::Float64 # width
     dx::Float64 # spatial step
     nx::Int64 # number of spatial points
     rho::Float64 # density
     C::Float64 # Chezy friction factor
     tau::Function # function of time t: Float64 -> Float64
                     # wind stress as a function of time
+    q_left::Function # inflow at left boundary
+    q_right::Function # outflow at right boundary
 end
 
 """
@@ -117,17 +120,20 @@ function (f::Wave1DSurge_cpu)(dx_dt,x,p,t)
     dx=f.dx     # spatial step 
     rho=f.rho   # density
     C=f.C       # Chezy friction factor
-    tau_val = f.tau(t)
+    tau_val = f.tau(t) # wind stress
+    W=f.W       # width (only used for boundary)
+    q_left_val=f.q_left(t) # inflow at left boundary [m^3/s]
+    q_right_val=f.q_right(t) # outflow at right boundary
     # temporary variables
     ∂h∂x = similar(x.u) # allocating version, is not optimal for performance
     ∂Hu∂x = similar(x.h)
     h_avg = similar(x.u)
     # compute spatial derivatives and averages
-    u=x.u
-    u[1]=0.0
-    u[end]=0.0
     avg_h!(h_avg,x.h,dx)
     H=h_avg .+ D
+    u=x.u
+    u[1]=q_left_val/(H[1]*W)
+    u[end]=q_right_val/(H[end]*W)
     Hu=H .* u
     du_dx!(∂Hu∂x,Hu,dx)
     dh_dx!(∂h∂x,x.h,dx)
