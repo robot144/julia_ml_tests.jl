@@ -123,13 +123,18 @@ function (f::Wave1DSurge_cpu)(dx_dt,x,p,t)
     ∂Hu∂x = similar(x.h)
     h_avg = similar(x.u)
     # compute spatial derivatives and averages
+    u=x.u
+    u[1]=0.0
+    u[end]=0.0
     avg_h!(h_avg,x.h,dx)
     H=h_avg .+ D
-    Hu=H .* x.u
+    Hu=H .* u
     du_dx!(∂Hu∂x,Hu,dx)
     dh_dx!(∂h∂x,x.h,dx)
     # compute time derivatives
     @. dx_dt.u = -g * ∂h∂x + tau_val/(rho * H) - (g*x.u*abs(x.u))/(C*C*rho*H) 
+    dx_dt.u[1]=0.0
+    dx_dt.u[end]=0.0
     @. dx_dt.h = -∂Hu∂x
 end
 
