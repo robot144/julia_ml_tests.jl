@@ -1,7 +1,7 @@
 # model_1d_wave_periodic.jl
 # 1D wave equation with periodic boundary conditions
 # 1D Wave-equation / linearized shallow-water equation on a periodic domain
-
+#
 # The one-dimensional shallow-water equations can be linearized and simplified to the 1D wave-equation:
 # $\partial h/\partial t + D \partial u / \partial x = 0$
 # $\partial u/\partial t + g \partial h / \partial x = 0$
